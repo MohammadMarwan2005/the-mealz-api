@@ -15,3 +15,5 @@ Welcome to TheMealzAPI repository! This project is a comprehensive meals guide a
 7. Coil: Used for efficient image loading.
 #
 - APK Link: [Here](https://drive.google.com/file/d/1SIN8PNDfY6b_BNL7UNJD-CmVjxWsFluv/view?usp=drive_link)
+#
+![The Mealz Cover](https://github.com/MohammadMarwan2005/the-mealz-api/assets/118211755/133ea2ea-f17f-4f9b-8eb8-47dd6329ed46)
