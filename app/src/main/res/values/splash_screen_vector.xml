@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SplashScreen.MySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFFFF8F4</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen_vector</item>
+        <item name="postSplashScreenTheme">@style/Theme.MealzApp</item>
+        <item name="drawableSize">195dp</item>
+    </style>
+</resources>
