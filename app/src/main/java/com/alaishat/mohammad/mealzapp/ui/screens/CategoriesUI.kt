@@ -22,7 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.alaishat.mohammad.domain.model.allcategories.Category
+import com.alaishat.mohammad.domain.model.allcategories.CategoryDomainModel
 import com.alaishat.mohammad.mealzapp.FilteredMeals
 import com.alaishat.mohammad.mealzapp.ui.components.MyCircularProgressIndicator
 import com.alaishat.mohammad.mealzapp.ui.theme.MealzAppTheme
@@ -50,7 +50,7 @@ fun CategoriesUI(homeViewModel: HomeViewModel = hiltViewModel(), navController: 
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(categories.size) {
-                CategoryItem(category = categories[it], onClick = {
+                CategoryItem(categoryDomainModel = categories[it], onClick = {
                     navController.navigate(FilteredMeals.route + "/${categories[it].strCategory}")
                 })
             }
@@ -59,7 +59,7 @@ fun CategoriesUI(homeViewModel: HomeViewModel = hiltViewModel(), navController: 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CategoryItem(category: Category, onClick: () -> Unit = { }) {
+fun CategoryItem(categoryDomainModel: CategoryDomainModel, onClick: () -> Unit = { }) {
     Card(onClick = onClick) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -67,11 +67,11 @@ fun CategoryItem(category: Category, onClick: () -> Unit = { }) {
         ) {
             AsyncImage(
                 modifier = Modifier.clip(CircleShape),
-                model = category.strCategoryThumb, contentDescription = ""
+                model = categoryDomainModel.strCategoryThumb, contentDescription = ""
             )
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(text = category.strCategory, style = MaterialTheme.typography.titleLarge)
-                Text(text = category.strCategoryDescription)
+                Text(text = categoryDomainModel.strCategory, style = MaterialTheme.typography.titleLarge)
+                Text(text = categoryDomainModel.strCategoryDescription)
             }
         }
 //        Divider(modifier = Modifier.fillMaxWidth())
@@ -87,7 +87,7 @@ private fun PreviewMealItem(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.background
         ) {
             CategoryItem(
-                Category(
+                CategoryDomainModel(
                     "3",
                     "Title",
                     "Description Description Description Description Description Description Description ",

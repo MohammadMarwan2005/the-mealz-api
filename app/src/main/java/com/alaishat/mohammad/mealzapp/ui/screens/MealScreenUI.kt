@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -31,8 +30,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -42,8 +39,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.alaishat.mohammad.domain.model.MealsListResonse.Meal
-import com.alaishat.mohammad.domain.model.MealsListResonse.getIngredientsList
+import com.alaishat.mohammad.domain.model.MealsList.FullMealDomainModel
+import com.alaishat.mohammad.domain.model.MealsList.getIngredientsList
 import com.alaishat.mohammad.domain.model.allareas.getAreaModel
 import com.alaishat.mohammad.mealzapp.FilteredMeals
 import com.alaishat.mohammad.mealzapp.FilteredMealsByArea
@@ -70,7 +67,7 @@ fun MealScreenUI(
     }
 
     val meals = mealViewModel.mealsResponse.collectAsStateWithLifecycle().value?.meals ?: emptyList()
-    var meal: Meal? = null
+    var meal: FullMealDomainModel? = null
 
     if (meals.isNotEmpty())
         meal = meals[0]

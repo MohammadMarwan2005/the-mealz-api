@@ -36,9 +36,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.alaishat.mohammad.domain.model.MealsListResonse.MealsListResponse
-import com.alaishat.mohammad.domain.model.allareas.getModel
-import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesResponse
+import com.alaishat.mohammad.domain.model.MealsList.MealsListDomainModel
+import com.alaishat.mohammad.domain.model.allareas.getFlagModel
+import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesDomainModel
 import com.alaishat.mohammad.domain.model.allgredient.getModel
 import com.alaishat.mohammad.mealzapp.FilteredMeals
 import com.alaishat.mohammad.mealzapp.FilteredMealsByArea
@@ -63,7 +63,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
 
-    val categoriesResponse: AllCategoriesResponse? = homeViewModel.categories.collectAsStateWithLifecycle().value
+    val categoriesResponse: AllCategoriesDomainModel? = homeViewModel.categories.collectAsStateWithLifecycle().value
     val categories = categoriesResponse?.categories ?: emptyList()
     val isLoadingAllCategories = homeViewModel.isLoadingCategories.collectAsStateWithLifecycle().value
 
@@ -76,9 +76,9 @@ fun HomeScreen(
     val isLoadingAreas = homeViewModel.isLoadingAreas.collectAsStateWithLifecycle().value
 
 //    val randomMeals: List<Meal> = homeViewModel.randomMealResponse.collectAsStateWithLifecycle().value?.meals ?: emptyList()
-    val randomMeals: List<MealsListResponse?> = homeViewModel.meals.collectAsStateWithLifecycle().value
+    val randomMeals: List<MealsListDomainModel?> = homeViewModel.randomMeals.collectAsStateWithLifecycle().value
 //    val isLoadingRandomMeal = homeViewModel.isLoadingRandomMeal.collectAsStateWithLifecycle().value
-    val isLoadingRandomMealsList = homeViewModel.isLoadingRandomMealsList.collectAsStateWithLifecycle().value
+//    val isLoadingRandomMealsList = homeViewModel.isLoadingRandomMealsList.collectAsStateWithLifecycle().value
 
     val context = LocalContext.current
 
@@ -94,12 +94,13 @@ fun HomeScreen(
         if (areasResponse == null)
             homeViewModel.getAllAreas()
     }
-    LaunchedEffect(Unit) {
-        homeViewModel.getRandomMeal()
-    }
+//    LaunchedEffect(Unit) {
+////        homeViewModel.getRandomMeal()
+//    }
+    val randomMealsNumber = 5
     LaunchedEffect(Unit) {
         if (randomMeals.getOrNull(0) == null)
-            homeViewModel.getMeals()
+            homeViewModel.getRandomMeals(randomMealsNumber)
     }
 
     var update by rememberSaveable {
@@ -108,7 +109,7 @@ fun HomeScreen(
 
     if (update) {
         LaunchedEffect(Unit) {
-            homeViewModel.getMeals()
+            homeViewModel.getRandomMeals(randomMealsNumber)
         }
         update = false
     }
@@ -243,7 +244,7 @@ fun HomeScreen(
                             items(areas.size) {
                                 SmallSquareCard(
                                     title = areas[it].strArea,
-                                    model = areas[it].getModel(),
+                                    model = areas[it].getFlagModel(),
                                     onclick = {
                                         navController.navigate(FilteredMealsByArea.route + "/${areas[it].strArea}")
                                     },

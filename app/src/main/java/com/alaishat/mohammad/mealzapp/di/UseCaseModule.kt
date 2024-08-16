@@ -1,19 +1,19 @@
 package com.alaishat.mohammad.mealzapp.di
 
 import com.alaishat.mohammad.domain.repo.AllAreasRepo
-import com.alaishat.mohammad.domain.repo.AllCategoriesDomainRepo
+import com.alaishat.mohammad.domain.repo.AllCategoriesRepo
 import com.alaishat.mohammad.domain.repo.AllIngredientRepo
-import com.alaishat.mohammad.domain.repo.FilteredMealsDomainRepo
+import com.alaishat.mohammad.domain.repo.FilteredMealsRepo
 import com.alaishat.mohammad.domain.repo.MealByIdRepo
 import com.alaishat.mohammad.domain.repo.RandomMealRepo
 import com.alaishat.mohammad.domain.repo.SearchResultRepo
-import com.alaishat.mohammad.domain.uscase.GetAllAreasUseCase
-import com.alaishat.mohammad.domain.uscase.GetAllCategoriesUseCase
-import com.alaishat.mohammad.domain.uscase.GetAllIngredientUseCase
-import com.alaishat.mohammad.domain.uscase.GetFilteredMealsUseCase
-import com.alaishat.mohammad.domain.uscase.GetMealByIdUseCase
-import com.alaishat.mohammad.domain.uscase.GetRandomMealUseCase
-import com.alaishat.mohammad.domain.uscase.GetSearchResultUseCase
+import com.alaishat.mohammad.domain.usecase.GetAllAreasUseCase
+import com.alaishat.mohammad.domain.usecase.GetAllCategoriesUseCase
+import com.alaishat.mohammad.domain.usecase.GetAllIngredientUseCase
+import com.alaishat.mohammad.domain.usecase.GetFilteredMealsUseCase
+import com.alaishat.mohammad.domain.usecase.GetMealByIdUseCase
+import com.alaishat.mohammad.domain.usecase.GetRandomMealUseCase
+import com.alaishat.mohammad.domain.usecase.GetSearchResultUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,13 +29,13 @@ import dagger.hilt.components.SingletonComponent
 object UseCaseModule {
 
     @Provides
-    fun provideGetMealsUseCase(allCategoriesDomainRepo: AllCategoriesDomainRepo): GetAllCategoriesUseCase {
-        return GetAllCategoriesUseCase(allCategoriesDomainRepo)
+    fun provideGetMealsUseCase(allCategoriesRepo: AllCategoriesRepo): GetAllCategoriesUseCase {
+        return GetAllCategoriesUseCase(allCategoriesRepo)
     }
 
     @Provides
-    fun provideGetFilteredMealsUseCase(filteredMealsDomainRepo: FilteredMealsDomainRepo): GetFilteredMealsUseCase {
-        return GetFilteredMealsUseCase(filteredMealsDomainRepo)
+    fun provideGetFilteredMealsUseCase(filteredMealsRepo: FilteredMealsRepo): GetFilteredMealsUseCase {
+        return GetFilteredMealsUseCase(filteredMealsRepo)
     }
 
     @Provides

@@ -2,11 +2,11 @@ package com.alaishat.mohammad.mealzapp.di
 
 import android.util.Log
 import com.alaishat.mohammad.data.remote.APIService
-import com.alaishat.mohammad.domain.model.MealsListResonse.MealsListResponse
-import com.alaishat.mohammad.domain.model.allareas.AllAreasResponse
-import com.alaishat.mohammad.domain.model.allgredient.AllIngredientResponse
-import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesResponse
-import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsResponse
+import com.alaishat.mohammad.domain.model.MealsList.MealsListDomainModel
+import com.alaishat.mohammad.domain.model.allareas.AllAreasDomainModel
+import com.alaishat.mohammad.domain.model.allgredient.AllIngredientDomainModel
+import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesDomainModel
+import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsDomainModel
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -64,76 +64,74 @@ object NetworkModule {
     @Singleton
     fun provideApiService(httpClient: HttpClient): APIService {
         return object : APIService {
-            override suspend fun getAllCategoriesMeals(): AllCategoriesResponse {
+            override suspend fun getAllCategoriesMeals(): AllCategoriesDomainModel {
                 val response: HttpResponse = httpClient.get(urlString = getAllCategoriesUrlString)
                 val jsonString = response.bodyAsText()
-                val result: AllCategoriesResponse = gson.fromJson(jsonString, AllCategoriesResponse::class.java)
+                val result: AllCategoriesDomainModel = gson.fromJson(jsonString, AllCategoriesDomainModel::class.java)
                 return result
             }
 
-            override suspend fun getFilteredMealsByCategory(category: String): FilteredMealsResponse {
+            override suspend fun getFilteredMealsByCategory(category: String): FilteredMealsDomainModel {
                 val response = httpClient.get(urlString = filteredMealsByCategoryUrlString + category)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, FilteredMealsResponse::class.java)
+                val result = gson.fromJson(jsonString, FilteredMealsDomainModel::class.java)
                 return result
             }
 
-            override suspend fun getAllIngredient(): AllIngredientResponse {
+            override suspend fun getAllIngredient(): AllIngredientDomainModel {
                 val response = httpClient.get(urlString = getAllIngredientsUrlString)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, AllIngredientResponse::class.java)
+                val result = gson.fromJson(jsonString, AllIngredientDomainModel::class.java)
                 Log.d("getAllIngredient json:", jsonString)
                 Log.d("getAllIngredient, result:", result.toString())
                 return result
             }
 
-            override suspend fun getAllAreas(): AllAreasResponse {
+            override suspend fun getAllAreas(): AllAreasDomainModel {
                 val response = httpClient.get(urlString = allAreasUrlString)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, AllAreasResponse::class.java)
+                val result = gson.fromJson(jsonString, AllAreasDomainModel::class.java)
                 Log.d("All areas json:", jsonString)
                 Log.d("All areas, result:", result.toString())
                 return result
             }
 
-            override suspend fun getMealById(id: Int): MealsListResponse {
+            override suspend fun getMealById(id: Int): MealsListDomainModel {
                 val response = httpClient.get(urlString = getMealByIdUrlString + id.toString())
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, MealsListResponse::class.java)
+                val result = gson.fromJson(jsonString, MealsListDomainModel::class.java)
                 Log.d("getMealById $id result: ", result.toString())
                 return result
             }
 
-            override suspend fun getMealsByArea(area: String): FilteredMealsResponse {
+            override suspend fun getMealsByArea(area: String): FilteredMealsDomainModel {
                 val response = httpClient.get(urlString = filteredMealsByAreaUrlString+ area)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, FilteredMealsResponse::class.java)
+                val result = gson.fromJson(jsonString, FilteredMealsDomainModel::class.java)
                 return result
             }
-            override suspend fun getMealsByIngredient(ingredient: String): FilteredMealsResponse {
+            override suspend fun getMealsByIngredient(ingredient: String): FilteredMealsDomainModel {
                 val response = httpClient.get(urlString = filteredMealsByIngredientUrlString+ ingredient)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, FilteredMealsResponse::class.java)
+                val result = gson.fromJson(jsonString, FilteredMealsDomainModel::class.java)
                 return result
             }
 
-            override suspend fun getRandomMeal(): MealsListResponse {
+            override suspend fun getRandomMeal(): MealsListDomainModel {
                 val response = httpClient.get(urlString = getRandomMealUrlString)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, MealsListResponse::class.java)
+                val result = gson.fromJson(jsonString, MealsListDomainModel::class.java)
                 Log.d("Random Meal: result: ", result.toString())
                 return result
             }
 
-            override suspend fun getSearchResultOn(searchQuery: String): MealsListResponse {
+            override suspend fun getSearchResultOn(searchQuery: String): MealsListDomainModel {
                 val response = httpClient.get(urlString = getSearchResultUrlString + searchQuery)
                 val jsonString = response.bodyAsText()
-                val result = gson.fromJson(jsonString, MealsListResponse::class.java)
+                val result = gson.fromJson(jsonString, MealsListDomainModel::class.java)
                 Log.d("Search $searchQuery result: ", result.toString())
                 return result
             }
-
-
         }
     }
 }

@@ -3,18 +3,14 @@ package com.alaishat.mohammad.mealzapp
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesResponse
 import com.alaishat.mohammad.mealzapp.ui.screens.CategoriesUI
 import com.alaishat.mohammad.mealzapp.ui.screens.FilteredMealsByAreaUI
 import com.alaishat.mohammad.mealzapp.ui.screens.HomeScreen
@@ -23,9 +19,6 @@ import com.alaishat.mohammad.mealzapp.ui.screens.FilteredMealsByCategoryUI
 import com.alaishat.mohammad.mealzapp.ui.screens.FilteredMealsByIngredientUI
 import com.alaishat.mohammad.mealzapp.ui.screens.SearchScreen
 import com.alaishat.mohammad.mealzapp.ui.theme.MealzAppTheme
-import com.alaishat.mohammad.mealzapp.viewmodels.FilteredMealsViewByCategoryModel
-import com.alaishat.mohammad.mealzapp.viewmodels.HomeViewModel
-import com.alaishat.mohammad.mealzapp.viewmodels.MealViewModel
 
 /**
  * Created by Mohammad Al-Aishat on Jun/28/2024.

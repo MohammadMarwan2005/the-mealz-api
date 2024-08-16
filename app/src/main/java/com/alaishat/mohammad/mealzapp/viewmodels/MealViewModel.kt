@@ -3,9 +3,8 @@ package com.alaishat.mohammad.mealzapp.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alaishat.mohammad.domain.model.MealsListResonse.MealsListResponse
-import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsResponse
-import com.alaishat.mohammad.domain.uscase.GetMealByIdUseCase
+import com.alaishat.mohammad.domain.model.MealsList.MealsListDomainModel
+import com.alaishat.mohammad.domain.usecase.GetMealByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,8 +20,8 @@ import javax.inject.Inject
 class MealViewModel @Inject constructor(
     private val getMealByIdUseCase: GetMealByIdUseCase,
 ) : ViewModel() {
-    private val _mealResponse: MutableStateFlow<MealsListResponse?> = MutableStateFlow(null)
-    val mealsResponse: StateFlow<MealsListResponse?> = _mealResponse.asStateFlow()
+    private val _mealResponse: MutableStateFlow<MealsListDomainModel?> = MutableStateFlow(null)
+    val mealsResponse: StateFlow<MealsListDomainModel?> = _mealResponse.asStateFlow()
 
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()

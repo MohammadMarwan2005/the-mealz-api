@@ -1,10 +1,10 @@
 package com.alaishat.mohammad.data.remote
 
-import com.alaishat.mohammad.domain.model.MealsListResonse.MealsListResponse
-import com.alaishat.mohammad.domain.model.allareas.AllAreasResponse
-import com.alaishat.mohammad.domain.model.allgredient.AllIngredientResponse
-import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesResponse
-import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsResponse
+import com.alaishat.mohammad.domain.model.MealsList.MealsListDomainModel
+import com.alaishat.mohammad.domain.model.allareas.AllAreasDomainModel
+import com.alaishat.mohammad.domain.model.allgredient.AllIngredientDomainModel
+import com.alaishat.mohammad.domain.model.allcategories.AllCategoriesDomainModel
+import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsDomainModel
 
 /**
  * Created by Mohammad Al-Aishat on Jun/27/2024.
@@ -12,13 +12,13 @@ import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsR
  */
 
 interface APIService {
-    suspend fun getAllCategoriesMeals(): AllCategoriesResponse
-    suspend fun getAllIngredient(): AllIngredientResponse
-    suspend fun getAllAreas(): AllAreasResponse
-    suspend fun getMealById(id: Int): MealsListResponse
-    suspend fun getFilteredMealsByCategory(category: String): FilteredMealsResponse
-    suspend fun getMealsByArea(area: String): FilteredMealsResponse
-    suspend fun getMealsByIngredient(ingredient: String): FilteredMealsResponse
-    suspend fun getRandomMeal(): MealsListResponse
-    suspend fun getSearchResultOn(searchQuery: String): MealsListResponse
+    suspend fun getAllCategoriesMeals(): AllCategoriesDomainModel
+    suspend fun getAllIngredient(): AllIngredientDomainModel
+    suspend fun getAllAreas(): AllAreasDomainModel
+    suspend fun getMealById(id: Int): MealsListDomainModel
+    suspend fun getFilteredMealsByCategory(category: String): FilteredMealsDomainModel
+    suspend fun getMealsByArea(area: String): FilteredMealsDomainModel
+    suspend fun getMealsByIngredient(ingredient: String): FilteredMealsDomainModel
+    suspend fun getRandomMeal(): MealsListDomainModel
+    suspend fun getSearchResultOn(searchQuery: String): MealsListDomainModel
 }

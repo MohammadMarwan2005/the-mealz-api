@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.alaishat.mohammad.domain.model.allgredient.Ingredient
+import com.alaishat.mohammad.domain.model.allgredient.IngredientDomainModel
 import com.alaishat.mohammad.domain.model.allgredient.getModel
 import com.alaishat.mohammad.mealzapp.FilteredMealsByIngredient
 import com.alaishat.mohammad.mealzapp.R
@@ -54,7 +54,7 @@ fun IngredientsLazyList(ingredients: List<Pair<String, String>>, navController: 
                                 .size(40.dp)
 //                            .border(border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary), CircleShape)
                                 .clip(CircleShape),
-                            model = Ingredient("", "", it.first, "").getModel(),
+                            model = IngredientDomainModel("", "", it.first, "").getModel(),
                             contentDescription = "",
                             placeholder = painterResource(id = R.drawable.ic_ingredients)
                         )

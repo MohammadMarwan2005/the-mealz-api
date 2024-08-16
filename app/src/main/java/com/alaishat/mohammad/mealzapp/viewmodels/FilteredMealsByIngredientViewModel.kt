@@ -4,8 +4,8 @@ package com.alaishat.mohammad.mealzapp.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsResponse
-import com.alaishat.mohammad.domain.uscase.GetFilteredMealsUseCase
+import com.alaishat.mohammad.domain.model.filteredmealsbycategory.FilteredMealsDomainModel
+import com.alaishat.mohammad.domain.usecase.GetFilteredMealsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,8 +24,8 @@ class FilteredMealsByIngredientViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _filteredMealsByIngredient: MutableStateFlow<FilteredMealsResponse?> = MutableStateFlow(null)
-    val filteredMealsByIngredient: StateFlow<FilteredMealsResponse?> = _filteredMealsByIngredient.asStateFlow()
+    private val _filteredMealsByIngredient: MutableStateFlow<FilteredMealsDomainModel?> = MutableStateFlow(null)
+    val filteredMealsByIngredient: StateFlow<FilteredMealsDomainModel?> = _filteredMealsByIngredient.asStateFlow()
     val _isReloadingMealsByIngredient: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoadingMealsByIngredient: StateFlow<Boolean> = _isReloadingMealsByIngredient.asStateFlow()
 

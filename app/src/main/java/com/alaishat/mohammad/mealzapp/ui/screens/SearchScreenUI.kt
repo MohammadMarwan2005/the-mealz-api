@@ -17,8 +17,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -34,6 +36,8 @@ import com.alaishat.mohammad.mealzapp.R
 import com.alaishat.mohammad.mealzapp.ui.components.MyCircularProgressIndicator
 import com.alaishat.mohammad.mealzapp.ui.components.StaggeredMealsGrid
 import com.alaishat.mohammad.mealzapp.viewmodels.SearchViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -70,6 +74,7 @@ fun SearchScreen(
 
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    var debounceJob by remember { mutableStateOf<Job?>(null) }
 
     Column(
         modifier = Modifier
@@ -80,17 +85,26 @@ fun SearchScreen(
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp),
             query = query,
-            onQueryChange = {
-                query = it
-                coroutineScope.launch {
-                    val old = it
-                    delay(1000)
-                    if (old == query){
+                onQueryChange = {
+                    query = it
+
+                    debounceJob?.cancel()
+
+                    debounceJob = coroutineScope.launch {
+                        delay(400)
                         search = true
-//                        android.widget.Toast.makeText(context, "search", Toast.LENGTH_SHORT).show()
                     }
-                }
-            },
+
+//                    coroutineScope.cancel()
+//                    coroutineScope.launch {
+//                        val old = it
+//                        delay(1000)
+//                        if (old == query){
+//                            search = true
+//    //                        android.widget.Toast.makeText(context, "search", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+                },
             onSearch = {
                 searchViewModel.getSearchResultOn(it)
             }, active = false, onActiveChange = { },
@@ -143,7 +157,7 @@ fun SearchScreen(
 
             } else
                 StaggeredMealsGrid(meals = meals.map {
-                    com.alaishat.mohammad.domain.model.filteredmealsbycategory.Meal(
+                    com.alaishat.mohammad.domain.model.filteredmealsbycategory.MealDomainModel(
                         it.idMeal,
                         it.strMeal,
                         it.strMealThumb

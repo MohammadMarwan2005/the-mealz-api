@@ -5,6 +5,7 @@ plugins {
 
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
 
 //    id("kotlin-kapt")
 //    id("com.google.dagger.hilt.android")
@@ -116,6 +117,14 @@ dependencies {
 
 
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    ksp(libs.androidx.room.compiler)
+
+
 
 
 

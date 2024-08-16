@@ -1,11 +1,9 @@
 package com.alaishat.mohammad.mealzapp.viewmodels
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alaishat.mohammad.domain.model.MealsListResonse.MealsListResponse
-import com.alaishat.mohammad.domain.uscase.GetSearchResultUseCase
+import com.alaishat.mohammad.domain.model.MealsList.MealsListDomainModel
+import com.alaishat.mohammad.domain.usecase.GetSearchResultUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,8 +19,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getSearchResultUseCase: GetSearchResultUseCase
 ): ViewModel() {
-    private val _searchResultResponse: MutableStateFlow<MealsListResponse?> = MutableStateFlow(null)
-    val searchResultResponse: StateFlow<MealsListResponse?> = _searchResultResponse.asStateFlow()
+    private val _searchResultResponse: MutableStateFlow<MealsListDomainModel?> = MutableStateFlow(null)
+    val searchResultResponse: StateFlow<MealsListDomainModel?> = _searchResultResponse.asStateFlow()
 
     private val _isLoadingSearchResult: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoadingSearchResult: StateFlow<Boolean> = _isLoadingSearchResult.asStateFlow()

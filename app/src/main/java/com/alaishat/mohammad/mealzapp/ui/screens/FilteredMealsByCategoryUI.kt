@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.alaishat.mohammad.domain.model.filteredmealsbycategory.Meal
+import com.alaishat.mohammad.domain.model.filteredmealsbycategory.MealDomainModel
 import com.alaishat.mohammad.mealzapp.ui.components.MealItem
 import com.alaishat.mohammad.mealzapp.ui.components.MealsUI
 import com.alaishat.mohammad.mealzapp.ui.components.MyCircularProgressIndicator
@@ -55,7 +55,7 @@ private fun PreviewMealItem() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            MealItem(Meal("3", "This si a title", "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg"))
+            MealItem(MealDomainModel("3", "This si a title", "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg"))
         }
     }
 }

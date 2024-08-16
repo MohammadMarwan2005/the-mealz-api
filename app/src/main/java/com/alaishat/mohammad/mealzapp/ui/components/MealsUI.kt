@@ -24,7 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.alaishat.mohammad.domain.model.filteredmealsbycategory.Meal
+import com.alaishat.mohammad.domain.model.filteredmealsbycategory.MealDomainModel
 import com.alaishat.mohammad.mealzapp.MealScreen
 
 /**
@@ -34,7 +34,7 @@ import com.alaishat.mohammad.mealzapp.MealScreen
 
 @Composable
 fun MealsUI(
-    meals: List<Meal>,
+    meals: List<MealDomainModel>,
     navController: NavController,
     titleString: String,
     topAppBarTitle: String = titleString,
@@ -63,7 +63,7 @@ fun MealsUI(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MealItem(meal: Meal) {
+fun MealItem(meal: MealDomainModel) {
     Card(onClick = {}) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -84,7 +84,7 @@ fun MealItem(meal: Meal) {
 @Composable
 fun StaggeredMealsGrid(
     paddingValues: PaddingValues = PaddingValues(0.dp),
-    meals: List<Meal>,
+    meals: List<MealDomainModel>,
     navController: NavController,
 ) {
     LazyVerticalStaggeredGrid(
